@@ -1,0 +1,71 @@
+const { gql } = require('apollo-server')
+
+const orderSchema = gql `
+  scalar DateTime
+
+  type User {
+    id:ID!
+    name:String!
+  }
+  type OrderItems {
+    id:ID!
+    quantity: Int
+    created_at: DateTime
+    modified_at: DateTime
+    product:Product
+    order:Order
+  }
+  type Order {
+    id:ID!
+    User: User
+    total: Float
+    created_at: DateTime
+    modified_at: DateTime
+    items:[OrderItems]
+  }
+ input OrderInput {
+    total: Float
+    created_at: DateTime
+    modified_at: DateTime
+    user_id:Int
+    Items:[OrderItemsInput]!
+  }
+
+ input OrderItemsInput {
+    quantity: Int
+    created_at: DateTime
+    modified_at: DateTime
+    product_id:Int
+  }
+
+
+  type Query {
+    orders: [Order]
+    order(id: ID!): Order!
+  }
+
+  type Mutation {
+    addOrder(order: OrderInput): Order!
+    updateOrder(id: ID!, order: OrderInput): updateOrderResposta!
+    updateOrderItems(id: ID!, order: OrderItemsInput): updateOrderResposta!
+    deleteOrder(id: ID!): deleteOrderResposta!
+  }
+
+  interface responseCustom {
+    code: Int!
+    mensagem: String!
+  }
+
+  type deleteOrderResposta implements responseCustom {
+    code: Int!
+    mensagem: String!
+  }
+
+  type updateOrderResposta implements responseCustom {
+    code: Int!
+    mensagem: String!
+    categoryAtualizado: Category!
+  }
+`
+
+module.exports = orderSchema

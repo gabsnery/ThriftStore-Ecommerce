@@ -1,0 +1,65 @@
+const { gql } = require('apollo-server')
+
+const productSchema = gql `
+scalar DateTime
+
+  type Product {
+    id:ID!
+    name: String!
+    desc: String!
+    SKU: String!
+    price: Float
+    category:Category
+    created_at: DateTime
+    modified_at: DateTime
+    deleted_at: DateTime
+  }
+ input ProductInput {
+    name: String!
+    desc: String!
+    SKU: String!
+    price: Float
+    category:CategoriesName
+    created_at: DateTime
+  }
+  type Category {
+    id: ID!
+    name: CategoriesName!
+  }
+
+  enum CategoriesName {
+    ESTUDANTE
+    DOCENTE
+    COORDENACAO
+  }
+
+  type Query {
+    products: [Product]
+    product(id: ID!): Product!
+  }
+
+  type Mutation {
+    addProduct(product: ProductInput): Product!
+    updateProduct(id: ID!, product: ProductInput): updateProductResposta!
+    deleteProduct(id: ID!): deleteProductResposta!
+  }
+
+  interface responseCustom {
+    code: Int!
+    mensagem: String!
+  }
+
+  type deleteProductResposta implements responseCustom {
+    code: Int!
+    mensagem: String!
+  }
+
+  type updateProductResposta implements responseCustom {
+    code: Int!
+    mensagem: String!
+    categoryAtualizado: Product!
+  }
+
+`
+
+module.exports = productSchema

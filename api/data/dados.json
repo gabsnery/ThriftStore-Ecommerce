@@ -1,0 +1,93 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Ana Torre",
+      "desc": "Ana Torre",
+      "SKU": "Ana Torre",
+      "price": 10.4,
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Gabriel Costa",
+      "desc": "Gabriel Costa",
+      "SKU": "Gabriel Costa",
+      "price": 10.4,
+      "category_id": 1
+    },
+    {
+      "id": 3,
+      "name": "Flavia Lins",
+      "desc": "Flavia Lins",
+      "SKU": "Flavia Lins",
+      "price": 10.4,
+      "category_id": 1
+    },
+    {
+      "id": 4,
+      "name": "Carlos Marques",
+      "desc": "Carlos Marques",
+      "SKU": "Carlos Marques",
+      "price": 10.4,
+      "category_id": 2
+    },
+    {
+      "id": 5,
+      "name": "Silvia Souza",
+      "desc": "Silvia Souza",
+      "SKU": "Silvia Souza",
+      "price": 10.4,
+      "category_id": 2
+    },
+    {
+      "id": 6,
+      "name": "Marcia Silva",
+      "desc": "Marcia Silva",
+      "SKU": "Marcia Silva",
+      "price": 10.4,
+      "category_id": 2
+    },
+    {
+      "name": "Marina Souza",
+      "desc": "Marina Souza",
+      "SKU": "Marina Souza",
+      "price": 10.4,
+      "category_id": 2,
+      "created_at": "2020-09-22T00:00:00.000Z",
+      "id": 7
+    },
+    {
+      "name": "Marina Souza",
+      "desc": "Marina Souza",
+      "SKU": "Marina Souza",
+      "price": 10.4,
+      "category_id": 2,
+      "created_at": "2020-09-22T00:00:00.000Z",
+      "id": 8
+    },
+    {
+      "name": "Ricardo Chaves",
+      "desc": "Ricardo Chaves",
+      "SKU": "Ricardo Chaves",
+      "price": 10.4,
+      "category_id": 2,
+      "created_at": "2020-09-22T00:00:00.000Z",
+      "id": 9
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "ESTUDANTE"
+    },
+    {
+      "id": 2,
+      "name": "DOCENTE"
+    },
+    {
+      "id": 3,
+      "name": "COORDENACAO"
+    }
+  ]
+}
