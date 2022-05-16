@@ -6,6 +6,9 @@ class OrdersAPI extends SQLDataSource {
   }
   async getOrders () {
     const orders = await this.db.select('*').from('order_details');
+    const items = await this.db.select('*').from('order_items');
+    const users = await this.db.select('*').from('user');
+
     return (orders.map(i => {
       return {
         id: i.id,
@@ -15,12 +18,12 @@ class OrdersAPI extends SQLDataSource {
         modified_at: i.modified_at,
         items: items
           .filter(x => x.order_id == i.id)
-          .map(k => ({
+          .map(async k => ({
             id: k.id,
             quantity: k.quantity,
             created_at: k.created_at,
             modified_at: k.modified_at,
-            product: dataSources.ProductsAPI.getProductById(k.product_id)
+            product: await this.context.dataSources.ProductsAPI.getProductById(k.product_id)
           }))
       }
     }))
@@ -39,12 +42,12 @@ class OrdersAPI extends SQLDataSource {
       created_at: i.created_at,
       modified_at: i.modified_at,
       deleted_at: i.deleted_at,
-      items: items.map(k => ({
+      items: items.map(async k => ({
         id: k.id,
         quantity: k.quantity,
         created_at: k.created_at,
         modified_at: k.modified_at,
-        product: this.context.dataSources.ProductsAPI.getProductById(
+        product: await this.context.dataSources.ProductsAPI.getProductById(
           k.product_id
         )
       }))
@@ -95,10 +98,10 @@ class OrdersAPI extends SQLDataSource {
       .from('order_items')
       .where({ id: Number(it.id) }).update(it)
     })
-    const finalItems= await this.getOrderItemsByOrder(orderId)
+    const Order= await this.getOrder(orderId)
 
     return {code:200,
-      mensagem:"FOi"}
+      mensagem:"FOi",order:Order}
   }
   
 }

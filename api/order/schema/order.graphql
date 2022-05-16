@@ -61,6 +61,7 @@ const orderSchema = gql `
   type updateOrderResposta implements responseCustom {
     code: Int!
     mensagem: String!
+    order:Order
   }
 `
 

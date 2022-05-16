@@ -17,11 +17,19 @@ class ProductsAPI extends SQLDataSource {
   }
 
   async getProductById (id) {
+    console.log(id)
     const product = await this.db
     .select('*')
     .from('product')
     .where({ id: Number(id) })
-    return product
+    console.log(product)
+    return ({
+      id: product[0].id,
+      name: product[0].name,
+      desc: product[0].desc,
+      SKU: product[0].SKU,
+      price: product[0].price
+    })
   }
 
   async addProduct (product) {
