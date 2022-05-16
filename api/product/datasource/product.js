@@ -1,41 +1,37 @@
-const { RESTDataSource } = require('apollo-datasource-rest')
+const { SQLDataSource } = require('datasource-sql')
 
-class ProductsAPI extends RESTDataSource {
-  constructor () {
-    super()
-    this.baseURL = 'http://localhost:3000'
-    this.respostaCustom = {
-      code: 201,
-      mensagem: 'operação feita com sucesso'
-    }
+class ProductsAPI extends SQLDataSource {
+  constructor (dbConfig) {
+    super(dbConfig)
   }
 
   async getProducts () {
-    const products = await this.get('/products')
+    const products = await this.db.select('*').from('product')
     return products.map(async product => ({
       id: product.id,
       name: product.name,
       desc: product.desc,
       SKU: product.SKU,
-      price: product.price,
-      category: await this.get(`/categories/${product.category_id}`)
+      price: product.price
     }))
   }
 
   async getProductById (id) {
-    const product = await this.get(`/products/${id}`)
-    product.category = await this.get(`/categories/${product.category_id}`)
+    const product = await this.db
+    .select('*')
+    .from('product')
+    .where({ id: Number(id) })
     return product
   }
 
   async addProduct (product) {
-    const products = await this.get('/products')
-    product.id = products.length + 1
-    const role = await this.get(`categories?name=${product.category}`)
-    await this.post('products', { ...product, category: category[0].id })
+    const product_id = await this.db
+    .insert(product)
+    .returning('id')
+    .into('product')
     return {
       ...product,
-      role: role[0]
+      id: product_id
     }
   }
 

@@ -42,27 +42,7 @@ const users = [
 const orderResolvers = {
   Query: {
     orders: (root, args, { dataSources }) =>
-      dataSources.OrdersAPI.getOrders().then(r =>
-        r.map(i => {
-          console.log('aquió', i)
-          return {
-            id: i.id,
-            User: users.find(x => x.id == i.user_id),
-            total: i.total,
-            created_at: i.created_at,
-            modified_at: i.modified_at,
-            items: items
-              .filter(x => x.order_id == i.id)
-              .map(k => ({
-                id: k.id,
-                quantity: k.quantity,
-                created_at: k.created_at,
-                modified_at: k.modified_at,
-                product: dataSources.ProductsAPI.getProductById(k.product_id)
-              }))
-          }
-        })
-      ),
+      dataSources.OrdersAPI.getOrders(),
     order: (root, { id }, { dataSources }) => {
       return dataSources.OrdersAPI.getOrder(id)
     }
@@ -71,8 +51,10 @@ const orderResolvers = {
     addOrder: async (root, { order }, { dataSources }) =>
       dataSources.OrdersAPI.addOrder(order),
     updateOrder: async (root, novosDados, { dataSources }) => {
-      console.log(novosDados)
       return dataSources.OrdersAPI.updateProduct(novosDados)
+    },
+    updateOrderItems: async (root, novosDados, { dataSources }) => {
+      return dataSources.OrdersAPI.updateOrderItems(novosDados)
     },
     deleteOrder: async (root, { id }, { dataSources }) =>
       dataSources.OrdersAPI.deleteProduct(id)

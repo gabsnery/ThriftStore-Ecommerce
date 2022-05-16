@@ -25,16 +25,13 @@ const orderSchema = gql `
   }
  input OrderInput {
     total: Float
-    created_at: DateTime
-    modified_at: DateTime
     user_id:Int
     Items:[OrderItemsInput]!
   }
 
  input OrderItemsInput {
+    id:ID
     quantity: Int
-    created_at: DateTime
-    modified_at: DateTime
     product_id:Int
   }
 
@@ -47,7 +44,7 @@ const orderSchema = gql `
   type Mutation {
     addOrder(order: OrderInput): Order!
     updateOrder(id: ID!, order: OrderInput): updateOrderResposta!
-    updateOrderItems(id: ID!, order: OrderItemsInput): updateOrderResposta!
+    updateOrderItems(orderId: ID!, Items: [OrderItemsInput]): updateOrderResposta!
     deleteOrder(id: ID!): deleteOrderResposta!
   }
 
@@ -64,7 +61,6 @@ const orderSchema = gql `
   type updateOrderResposta implements responseCustom {
     code: Int!
     mensagem: String!
-    categoryAtualizado: Category!
   }
 `
 

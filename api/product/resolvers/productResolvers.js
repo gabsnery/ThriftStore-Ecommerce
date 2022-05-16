@@ -20,10 +20,9 @@ const productResolvers = {
       dataSources.ProductsAPI.getProductById(id)
   },
   Mutation: {
-    addProduct: async (root, { user }, { dataSources }) =>
-      dataSources.ProductsAPI.addProduct(user),
+    addProduct: async (root, { product }, { dataSources }) =>
+      dataSources.ProductsAPI.addProduct(product),
     updateProduct: async (root, novosDados, { dataSources }) => {
-      console.log(novosDados)
       return dataSources.ProductsAPI.updateProduct(novosDados)
     },
     deleteProduct: async (root, { id }, { dataSources }) =>
