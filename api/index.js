@@ -23,7 +23,6 @@ const dbConfig = {
     database: 'thriftstore'
   }
 }
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
