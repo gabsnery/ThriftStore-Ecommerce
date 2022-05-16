@@ -11,7 +11,6 @@ const OrdersAPI = require('./order/datasource/order')
 
 const typeDefs = mergeTypeDefs([productSchema, orderSchema])
 const resolvers = [productResolvers, orderResolvers]
-
 const dbConfig = {
   client: 'mysql',
   useNullAsDefault: true,
