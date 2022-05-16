@@ -7,7 +7,6 @@ class OrdersAPI extends SQLDataSource {
   async getOrders () {
     return this.db.select('*').from('order_details')
   }
-  
   async getOrder (id) {
     const order = await this.db
       .select('*')
