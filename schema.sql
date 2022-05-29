@@ -30,6 +30,40 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `entry_details`
+--
+
+DROP TABLE IF EXISTS `entry_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entry_details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `modified_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `entry_items`
+--
+
+DROP TABLE IF EXISTS `entry_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entry_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `quantity` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `entry_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `order_details`
 --
 
@@ -67,7 +101,7 @@ CREATE TABLE `order_items` (
   KEY `fk_order_idx` (`order_id`),
   CONSTRAINT `fk_order` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`id`),
   CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,6 +118,8 @@ CREATE TABLE `product` (
   `SKU` varchar(45) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `category_id` int DEFAULT NULL,
+  `is_consigned` tinyint DEFAULT '1',
+  `consigned_percentage` decimal(2,0) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `modified_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -133,4 +169,4 @@ CREATE TABLE `user_type` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-15 23:22:21
+-- Dump completed on 2022-05-29 18:12:40
