@@ -16,7 +16,7 @@ class ProductsAPI extends SQLDataSource {
     }))
   }
 
-  async getProductById (id) {
+  async getProduct (id) {
     console.log(id)
     const product = await this.db
     .select('*')
@@ -39,7 +39,7 @@ class ProductsAPI extends SQLDataSource {
     .into('product')
     return {
       ...product,
-      id: product_id
+      id: product_id[0]
     }
   }
 

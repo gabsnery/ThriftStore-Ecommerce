@@ -5,7 +5,7 @@ const entryResolvers = {
     products: (root, args, { dataSources }) =>
       dataSources.ProductsAPI.getProducts(),
     product: (root, { id }, { dataSources }) =>
-      dataSources.ProductsAPI.getProductById(id)
+      dataSources.ProductsAPI.getProduct(id)
   },
   Mutation: {
     addProduct: async (root, { product }, { dataSources }) =>

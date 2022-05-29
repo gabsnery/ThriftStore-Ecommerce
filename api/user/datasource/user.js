@@ -10,10 +10,18 @@ class UsersAPI extends SQLDataSource {
     return Users.map(async User => ({
       id: User.id,
       name: User.name,
+      type: await this.getUserType(User.user_type_id)
     }))
   }
 
-  async getUserById (id) {
+  async getUserType(id) {
+    return this.db.select('*').first().from('user_type').where({id:id})
+  }
+
+  async getUserTypeByName(name) {
+    return this.db.select('*').first().from('user_type').where({name:name})
+  }
+  async getUser(id) {
     const User = await this.db
     .select('*')
     .from('User')
@@ -21,21 +29,18 @@ class UsersAPI extends SQLDataSource {
     return ({
       id: User[0].id,
       name: User[0].name,
-      desc: User[0].desc,
-      SKU: User[0].SKU,
-      price: User[0].price
+      type: await this.getUserType(User[0].user_type_id)
     })
   }
 
   async addUser (User) {
+    const user_type_id = await this.getUserTypeByName(User.type)
     const User_id = await this.db
-    .insert(User)
+    .insert({name:User.name,user_type_id:+user_type_id.id})
     .returning('id')
-    .into('User')
-    return {
-      ...User,
-      id: User_id
-    }
+    .into('user')
+    const new_user = await this.getUser(User_id[0])
+    return new_user
   }
 
   async updateUser (novosDados) {

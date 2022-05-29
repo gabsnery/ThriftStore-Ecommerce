@@ -3,36 +3,6 @@ const { gql } = require('apollo-server')
 const entrySchema = gql `
 scalar DateTime
 
-  type Product {
-    id:ID!
-    name: String!
-    desc: String!
-    SKU: String!
-    price: Float
-    category:Category
-    created_at: DateTime
-    modified_at: DateTime
-    deleted_at: DateTime
-  }
- input ProductInput {
-    name: String!
-    desc: String!
-    SKU: String!
-    price: Float
-    category:CategoriesName
-    created_at: DateTime
-  }
-  type Category {
-    id: ID!
-    name: CategoriesName!
-  }
-
-  enum CategoriesName {
-    ESTUDANTE
-    DOCENTE
-    COORDENACAO
-  }
-
   type Query {
     products: [Product]
     product(id: ID!): Product!

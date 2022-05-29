@@ -23,7 +23,7 @@ class OrdersAPI extends SQLDataSource {
             quantity: k.quantity,
             created_at: k.created_at,
             modified_at: k.modified_at,
-            product: await this.context.dataSources.ProductsAPI.getProductById(k.product_id)
+            product: await this.context.dataSources.ProductsAPI.getProduct(k.product_id)
           }))
       }
     }))
@@ -47,7 +47,7 @@ class OrdersAPI extends SQLDataSource {
         quantity: k.quantity,
         created_at: k.created_at,
         modified_at: k.modified_at,
-        product: await this.context.dataSources.ProductsAPI.getProductById(
+        product: await this.context.dataSources.ProductsAPI.getProduct(
           k.product_id
         )
       }))
