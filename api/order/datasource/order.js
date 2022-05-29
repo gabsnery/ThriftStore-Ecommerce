@@ -7,12 +7,11 @@ class OrdersAPI extends SQLDataSource {
   async getOrders () {
     const orders = await this.db.select('*').from('order_details');
     const items = await this.db.select('*').from('order_items');
-    const users = await this.db.select('*').from('user');
 
-    return (orders.map(i => {
+    return (orders.map(async i => {
       return {
         id: i.id,
-        User: users.find(x => x.id == i.user_id),
+        User: await this.context.dataSources.UsersAPI.getUser(i.user_id),
         total: i.total,
         created_at: i.created_at,
         modified_at: i.modified_at,

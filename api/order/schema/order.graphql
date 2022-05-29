@@ -2,11 +2,6 @@ const { gql } = require('apollo-server')
 
 const orderSchema = gql `
   scalar DateTime
-
-  type User {
-    id:ID!
-    name:String!
-  }
   type OrderItems {
     id:ID!
     quantity: Int
