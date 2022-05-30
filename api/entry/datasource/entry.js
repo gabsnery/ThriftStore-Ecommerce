@@ -9,7 +9,6 @@ class EntriesAPI extends SQLDataSource {
     const Entries = await this.db.select('*').from('entry_details')
     return Entries.map(async i => {
       const items = await this.getEntryItemsByOrder(i.id)
-      console.log(items)
       return {
         id: i.id,
         total: i.total,
@@ -72,10 +71,7 @@ class EntriesAPI extends SQLDataSource {
         modified_at: new Date(),
       })
       .into('entry_details')
-    console.log(Entry_id)
-    console.log(Entry)
     const Items = Entry.items ?? []
-    console.log(Items)
     Items.map(async item => {
       if (item.Product.id) {
         this.addEntryItem({

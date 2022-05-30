@@ -17,7 +17,6 @@ class ProductsAPI extends SQLDataSource {
   }
 
   async getProduct (id) {
-    console.log(id)
     const product = await this.db
     .select('*')
     .from('product')
