@@ -2,19 +2,19 @@ const { GraphQLScalarType } = require('graphql')
 
 const entryResolvers = {
   Query: {
-    products: (root, args, { dataSources }) =>
-      dataSources.ProductsAPI.getProducts(),
-    product: (root, { id }, { dataSources }) =>
-      dataSources.ProductsAPI.getProduct(id)
+    entries: (root, args, { dataSources }) =>
+      dataSources.EntriesAPI.getEntries(),
+    entry: (root, { id }, { dataSources }) =>
+      dataSources.EntriesAPI.getEntry(id)
   },
   Mutation: {
-    addProduct: async (root, { product }, { dataSources }) =>
-      dataSources.ProductsAPI.addProduct(product),
-    updateProduct: async (root, novosDados, { dataSources }) => {
-      return dataSources.ProductsAPI.updateProduct(novosDados)
+    addEntry: async (root, { Entry }, { dataSources }) =>
+      dataSources.EntriesAPI.addEntry(Entry),
+    updateEntry: async (root, novosDados, { dataSources }) => {
+      return dataSources.EntriesAPI.updateEntry(novosDados)
     },
-    deleteProduct: async (root, { id }, { dataSources }) =>
-      dataSources.ProductsAPI.deleteProduct(id)
+    deleteEntry: async (root, { id }, { dataSources }) =>
+      dataSources.EntriesAPI.deleteEntry(id)
   }
 }
 

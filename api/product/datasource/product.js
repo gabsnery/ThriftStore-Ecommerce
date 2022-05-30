@@ -22,7 +22,6 @@ class ProductsAPI extends SQLDataSource {
     .select('*')
     .from('product')
     .where({ id: Number(id) })
-    console.log(product)
     return ({
       id: product[0].id,
       name: product[0].name,

@@ -15,6 +15,7 @@ scalar DateTime
     deleted_at: DateTime
   }
  input ProductInput {
+   id:ID
     name: String!
     desc: String!
     SKU: String!
