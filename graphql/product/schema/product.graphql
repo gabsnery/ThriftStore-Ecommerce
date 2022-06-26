@@ -9,6 +9,7 @@ scalar DateTime
     desc: String!
     SKU: String!
     price: Float
+    stock:Int
     category:Category
     created_at: DateTime
     modified_at: DateTime

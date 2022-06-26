@@ -37,7 +37,7 @@ const orderSchema = gql `
   }
 
   type Mutation {
-    addOrder(order: OrderInput): Order!
+    addOrder(order: OrderInput): addOrderResposta!
     updateOrder(id: ID!, order: OrderInput): updateOrderResposta!
     updateOrderItems(orderId: ID!, Items: [OrderItemsInput]): updateOrderResposta!
     deleteOrder(id: ID!): deleteOrderResposta!
@@ -54,6 +54,11 @@ const orderSchema = gql `
   }
 
   type updateOrderResposta implements responseCustom {
+    code: Int!
+    mensagem: String!
+    order:Order
+  }
+  type addOrderResposta implements responseCustom {
     code: Int!
     mensagem: String!
     order:Order

@@ -7,34 +7,37 @@ class ProductsAPI extends SQLDataSource {
 
   async getProducts () {
     const products = await this.db.select('*').from('product')
-    return products.map(async product => ({
-      id: product.id,
-      name: product.name,
-      desc: product.desc,
-      SKU: product.SKU,
-      price: product.price
-    }))
+    return products.map(async product => product)
+  }
+  async decreaseStock (id, quantity) {
+    const product = await this.db
+      .select('stock')
+      .first()
+      .from('product')
+      .where({ id: Number(id) })
+    console.log('stock', product.stock)
+
+    await this.db
+      .from('product')
+      .where({ id: Number(id) })
+      .update({ ...product, stock: product.stock - quantity })
+
+    return this.getProduct(id)
   }
 
   async getProduct (id) {
     const product = await this.db
-    .select('*')
-    .from('product')
-    .where({ id: Number(id) })
-    return ({
-      id: product[0].id,
-      name: product[0].name,
-      desc: product[0].desc,
-      SKU: product[0].SKU,
-      price: product[0].price
-    })
+      .select('*')
+      .from('product')
+      .where({ id: Number(id) })
+    return product[0]
   }
 
   async addProduct (product) {
     const product_id = await this.db
-    .insert(product)
-    .returning('id')
-    .into('product')
+      .insert(product)
+      .returning('id')
+      .into('product')
     return {
       ...product,
       id: product_id[0]
